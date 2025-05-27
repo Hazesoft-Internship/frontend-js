@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<head>
+    <title>Battle Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #1e1e1e;
+            color: #fff;
+            padding: 40px;
+        }
+
+        .player {
+            margin: 30px 0;
+        }
+
+        .health-bar {
+            height: 30px;
+            width: 500px;
+            background-color: #454444;
+            border: 2px solid #c8c7c7;
+            margin: 10px auto;
+            border-radius: 6px;
+        }
+
+        .health-fill {
+            height: 100%;
+            background-color: rgb(48, 246, 48);
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            margin-top: 20px;
+            background-color: crimson;
+            border: none;
+            color: white;
+        }
+
+        button:disabled {
+            background-color: #888;
+            cursor: not-allowed;
+        }
+
+        .message {
+            font-size: 22px;
+            margin-top: 20px;
+            color: yellow;
+            font-weight: bold;
+        }
+
+        h2 {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>!!! Robo Battle !!! </h1>
+
+    <div class="player" id="player1">
+        <h2>Player 1</h2>
+        <div class="health-bar">
+            <div class="health-fill" id="health1"></div>
+        </div>
+    </div>
+
+    <div class="player" id="player2">
+        <h2>Player 2</h2>
+        <div class="health-bar">
+            <div class="health-fill" id="health2"></div>
+        </div>
+    </div>
+
+    <button id="fightBtn" onclick="fight()">FIGHT!</button>
+
+    <div class="message" id="messageArea"></div>
+
+    <script>
+    let health1 = 500;
+    let health2 = 500;
+    const fightBtn = document.getElementById("fightBtn");
+
+    function fight() {
+        if (health1 <= 0 || health2 <= 0) return;
+
+        const damage1 = Math.floor(Math.random() * 101); // Player 1 hits P2
+        const damage2 = Math.floor(Math.random() * 101); // Player 2 hits P1
+
+        health1 = Math.max(0, health1 - damage2);
+        health2 = Math.max(0, health2 - damage1);
+
+        document.getElementById('health1').style.width = (health1 / 500) * 100 + '%';
+        document.getElementById('health2').style.width = (health2 / 500) * 100 + '%';
+
+        let message = `
+             Player 1 took <strong>${damage2} XP</strong> damage.<br>
+             Player 2 took <strong>${damage1} XP</strong> damage.<br>
+        `;
+
+        if (damage1 >= 90) message += ` <strong>Player 1 POWER HIT!</strong><br>`;
+        if (damage2 >= 90) message += ` <strong>Player 2 POWER HIT!</strong><br>`;
+
+        if (health1 <= 0 && health2 <= 0) {
+            message += "<strong>It's a DRAW!</strong>";
+            fightBtn.disabled = true;
+        } else if (health1 <= 0) {
+            message += "<strong>Player 2 WINS!</strong>";
+            fightBtn.disabled = true;
+        } else if (health2 <= 0) {
+            message += "<strong>Player 1 WINS!</strong>";
+            fightBtn.disabled = true;
+        }
+
+        document.getElementById('messageArea').innerHTML = message;
+    }
+</script>
+
+</body>
+</html>
