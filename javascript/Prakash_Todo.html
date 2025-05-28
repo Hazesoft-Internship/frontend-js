@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple To-Do List</title>
+  </head>
+  <body>
+    <h2>My To-Do List</h2>
+    <input type="text" id="todo-input" placeholder="Enter a task" />
+    <button onclick="addTodo()">Add</button>
+    <ul id="todo-list"></ul>
+
+    <script>
+      // Load todos from localStorage when the page loads
+      window.onload = function () {
+        const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+        savedTodos.forEach((task) => {
+          createTodoElement(task);
+        });
+      };
+
+      function addTodo() {
+        const input = document.getElementById("todo-input");
+        const task = input.value.trim();
+
+        if (task === "") {
+          alert("Please enter a task.");
+          return;
+        }
+
+        createTodoElement(task);
+
+        // Save to localStorage
+        const todos = JSON.parse(localStorage.getItem("todos")) || [];
+        todos.push(task);
+        localStorage.setItem("todos", JSON.stringify(todos));
+
+        input.value = "";
+      }
+
+      function createTodoElement(task) {
+        const list = document.getElementById("todo-list");
+        const li = document.createElement("li");
+        li.textContent = task;
+
+        const btn = document.createElement("button");
+        btn.textContent = "Delete";
+        btn.onclick = function () {
+          li.remove();
+          removeFromStorage(task);
+        };
+
+        li.appendChild(document.createTextNode(" "));
+        li.appendChild(btn);
+        list.appendChild(li);
+      }
+
+      function removeFromStorage(taskToRemove) {
+        let todos = JSON.parse(localStorage.getItem("todos")) || [];
+        todos = todos.filter((task) => task !== taskToRemove);
+        localStorage.setItem("todos", JSON.stringify(todos));
+      }
+    </script>
+  </body>
+</html>

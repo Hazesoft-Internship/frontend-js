@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Battle Game</title>
+  <link rel="stylesheet" href="./game.css">
+</head>
+<body>
+
+  <h2 class="heading">Battle Game</h2>
+
+  <div class="game-area">
+    <div class="players-row">
+      <div class="player player1">
+        <h3>Human</h3>
+        <p id="player1-health">Health: 500</p>
+        <div class="health-bar-container">
+          <div id="player1-bar" class="health-bar"></div>
+        </div>
+      </div>
+
+      <div class="player player2">
+        <h3>Robot</h3>
+        <p id="player2-health">Health: 500</p>
+        <div class="health-bar-container">
+          <div id="player2-bar" class="health-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <button id="attack-button">Attack</button>
+  </div>
+
+  <div class="comments">
+    <h4>Comments</h4>
+    <div id="comment-box"></div>
+  </div>
+
+  <script src="./game.js"></script>
+
+</body>
+</html>
