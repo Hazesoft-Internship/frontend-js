@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Attack Game</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f4f4f4;
+    padding: 20px;
+}
+
+.game {
+    max-width: 600px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.health-bar-container {
+    margin-bottom: 20px;
+}
+
+.bar {
+    width: 100%;
+    background: #ddd;
+    height: 25px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: green;
+    width: 100%;
+    transition: width 0.3s;
+}
+
+#attack-btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.log {
+    margin-top: 20px;
+    text-align: left;
+    max-height: 200px;
+    overflow-y: auto;
+    background: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+#restart-btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    margin-left: 10px;
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#result-message {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #333;
+}
+    </style>
+</head>
+
+<body>
+    <div class="game">
+        <h1>Player vs Bot</h1>
+
+        <div class="health-bar-container">
+            <p>Player Health: <span id="player-health">500</span></p>
+            <div class="bar">
+                <div id="player-bar" class="bar-fill"></div>
+            </div>
+
+            <p>Bot Health: <span id="bot-health">500</span></p>
+            <div class="bar">
+                <div id="bot-bar" class="bar-fill"></div>
+            </div>
+        </div>
+
+        <button id="attack-btn">Attack</button>
+
+        <div id="log" class="log"></div>
+    </div>
+
+    <button id="restart-btn" style="display:none;">Restart</button>
+
+    <h2 id="result-message"></h2>
+
+    <button id="restart-btn" style="display:none;">Restart</button>
+
+
+
+    <script>
+        let playerHealth = 500;
+        let botHealth = 500;
+
+        const playerHealthEl = document.getElementById('player-health');
+        const botHealthEl = document.getElementById('bot-health');
+        const playerBar = document.getElementById('player-bar');
+        const botBar = document.getElementById('bot-bar');
+        const log = document.getElementById('log');
+        const attackBtn = document.getElementById('attack-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const resultMessage = document.getElementById('result-message');
+
+        //  to generate random damage between 0 and 100
+        function getRandomDamage() {s
+            return Math.floor(Math.random() * 101);
+        }
+
+        //  to log damage messages
+        function logDamage(attacker, damage) {
+            const message = `${attacker} deals ${damage} damage ${damage > 90 ? '<strong>CRITICAL HIT!</strong>' : ''}`;
+            const p = document.createElement('p');
+            p.innerHTML = message;
+            log.prepend(p);
+        }
+
+        //  to update health values and progress bars
+        function updateBars() {
+            playerHealthEl.textContent = playerHealth;
+            botHealthEl.textContent = botHealth;
+
+            playerBar.style.width = (playerHealth / 500 * 100) + '%';
+            botBar.style.width = (botHealth / 500 * 100) + '%';
+
+            // Check for game over
+            if (playerHealth <= 0 || botHealth <= 0) {
+                attackBtn.disabled = true;
+                restartBtn.style.display = 'inline-block';
+
+                let resultText = "";
+                if (playerHealth <= 0 && botHealth <= 0) {
+                    resultText = "It's a draw!";
+                } else if (playerHealth <= 0) {
+                    resultText = "Bot Wins!";
+                } else {
+                    resultText = "Player Wins!";
+                }
+
+                resultMessage.textContent = resultText;
+
+                const result = document.createElement('h2');
+                result.textContent = resultText;
+                log.prepend(result);
+            }
+        }
+
+        // Attack button click handler
+        attackBtn.addEventListener('click', () => {
+            if (playerHealth > 0 && botHealth > 0) {
+                const playerDamage = getRandomDamage();
+                const botDamage = getRandomDamage();
+
+                botHealth -= playerDamage;
+                playerHealth -= botDamage;
+
+                if (botHealth < 0) botHealth = 0;
+                if (playerHealth < 0) playerHealth = 0;
+
+                logDamage('Player', playerDamage);
+                logDamage('Bot', botDamage);
+
+                updateBars();
+            }
+        });
+
+        // Restart button click handler
+        restartBtn.addEventListener('click', () => {
+            // Reset health
+            playerHealth = 500;
+            botHealth = 500;
+
+            // Reset UI
+            updateBars();
+            log.innerHTML = '';
+            resultMessage.textContent = '';
+            attackBtn.disabled = false;
+            restartBtn.style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>
