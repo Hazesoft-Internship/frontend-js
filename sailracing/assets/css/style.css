@@ -1,0 +1,467 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.navbar {
+    width: 100%;
+    padding: 30px 40px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.navdiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.logo img {
+
+    height: 50px;
+    object-fit: contain;
+    filter: invert(100%);
+}
+
+.menu,
+.search {
+    filter: invert(100%);
+}
+
+.navmenu {
+    color: white;
+    display: flex;
+    gap: 100px;
+    list-style: none;
+}
+
+.navmenu li {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.navmenu li:hover {
+    opacity: 0.7;
+}
+
+/* Right side icons */
+.divicons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.divicons img {
+    height: 25px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+
+
+.hero-section {
+    padding-top: 20px;
+    height: 100vh;
+    width: 100vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../images/background/hero.png");
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+
+
+.hero-text {
+    z-index: 1;
+}
+
+.subheading {
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.main-heading {
+    font-size: 48px;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+/* SR VEST SECTION */
+
+.sr-vest {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: black;
+    height: 100vh;
+    width: 100vw;
+}
+
+.description {
+    color: white;
+    font-size: 24px;
+}
+
+.vest-detail {
+    max-width: 500px;
+    margin-left: 6rem;
+    color: white;
+
+}
+
+.vest-image img {
+    /* margin-top:12rem; */
+    height: 100%;
+    width: 100%;
+}
+
+/* Typography & Button */
+.section-title {
+    margin: 0;
+    padding: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 2rem;
+    font-weight: normal;
+    color: white;
+}
+
+.explore {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: normal;
+    color: white;
+}
+
+.explore-button {
+    width: 150px;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: black;
+    color: white;
+    padding: 12px 0;
+    border: 1px solid white;
+    border-radius: 5px;
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+}
+
+.explore-button:hover {
+    background-color: white;
+    color: black;
+}
+
+/* New Arrivals Section */
+
+.newarrival {
+    text-align: center;
+    padding: 50px 0;
+    background-color: black;
+    color: white;
+}
+
+.exp {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/*Ocean Hood Section*/
+
+.oceanhood {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: black;
+    height: 100vh;
+    width: 100vw;
+}
+
+.hood-and-jacket {
+    display: grid;
+    padding-right: 200px;
+    padding-left: 200px;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: auto;
+    justify-content: center;
+    overflow: hidden;
+    background-color: black;
+}
+
+.item-title {
+    margin: 0px;
+    padding-top: 30px;
+    color: white;
+    display: block;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+    font-weight: bold;
+    text-align: center;
+}
+
+.item-color {
+    color: #aaa;
+    display: block;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: small;
+}
+
+.item-price {
+    margin: 0px;
+    padding: 0px;
+    color: white;
+    display: block;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: small;
+    font-weight: normal;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    padding-top: 150px;
+}
+
+.item img {
+    width: 850px;
+    height: auto;
+}
+
+/* Wind Collection Section */
+
+.windcollection {
+    padding-top: 20px;
+    height: 100vh;
+    width: 100vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../images/background/wind-collection.png");
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+
+
+.wind-text {
+    z-index: 1;
+}
+
+.subheading {
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.main-heading {
+    font-size: 48px;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+.explore {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: normal;
+    color: white;
+}
+
+.explore-button2 {
+    width: 150px;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: transparent;
+    color: white;
+    padding: 12px 0;
+    border: 2px solid white;
+    border-radius: 5px;
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+    align-self: center;
+    position: relative;
+    top: 160px;
+}
+
+.explore-button:hover {
+    background-color: white;
+    color: black;
+}
+
+
+/*video Section*/
+
+.club-house {
+    height: 150vh;
+    width: 100vw;
+    background-color: black;
+
+}
+
+.clubhouse-subheading,
+.clubhouse-title {
+    color: white;
+    background-color: black;
+    margin-left: 90px;
+}
+
+.clubhouse-image img {
+    width: 80%;
+    height: 80%;
+    margin-left: 100px;
+}
+
+.clubhouse-button {
+    background-color: black;
+    position: relative;
+    margin-top: 50px;
+}
+
+
+
+.explore-button3 {
+    width: 150px;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: black;
+    color: white;
+    padding: 12px 0;
+    border: 1px solid white;
+    border-radius: 5px;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    margin-left: 100px;
+}
+
+.explore-button3:hover {
+    background-color: white;
+    color: black;
+}
+
+
+
+.hood-titles {
+    text-align: center;
+    padding: 50px 0;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+}
+
+.section-title {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+
+
+.last-man {
+    height: 100vh;
+    background-image: url("../images/background/lastman.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.last-man-text {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    opacity: 0.8;
+}
+
+.last-man-gradient {
+    height: 100vh;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.0));
+}
+
+.bottom-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 30px;
+}
+
+.bottom-nav>p {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+}
+
+.copyright-sailracing {
+    font-size: small;
+    color: white;
+    opacity: 0.7;
+}
+
+.footer-section {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+.footer-text {
+    color: white;
+    opacity: 0.6;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    width: 45rem;
+    text-align: center;
+}
+
+.email-section {
+    padding: 30px 0px 30px 0px;
+}
+
+.subscribe-email {
+    display: inline;
+    color: white;
+    height: 3rem;
+    width: 25rem;
+    padding: 0.95rem 4rem 1.05rem 4rem;
+    border: 1px solid white;
+}
+
+.enter-email {
+    height: 3rem;
+    width: 25rem;
+    border: 1px solid white;
+}
+
+.payment-methods {
+    width: 50rem;
+}
