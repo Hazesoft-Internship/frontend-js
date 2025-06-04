@@ -1,0 +1,23 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Water Bottle",
+      "price": "120",
+      "quantity": "100",
+      "type": "Physical"
+    }
+  ],
+  "users": [
+    {
+      "id": "admin",
+      "name": "Admin User",
+      "role": "admin"
+    },
+    {
+      "id": "manager01",
+      "name": "Store Manager",
+      "role": "manager"
+    }
+  ]
+}
