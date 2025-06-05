@@ -3,6 +3,8 @@
 import React from "react";
 import Button from "./Button";
 import Link from "next/link";
+import "./css/table.css";
+import useApiRequest from "@/hooks/useApiRequest";
 
 type TableProps = {
   data: {
@@ -14,150 +16,57 @@ type TableProps = {
   }[];
 };
 
+type Item = {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  type: string;
+};
+
 const Table = ({ data }: TableProps) => {
+  const { handleRequest } = useApiRequest();
+  const handleDelete = async (item: Item) => {
+    try {
+      let confirm = window.confirm(`Do you want to delete ${item.name} ?`);
+      if (!confirm) {
+        return;
+      }
+      handleRequest({
+        url: `http://localhost:3000/products/${item.id}`,
+        method: "delete",
+      });
+      window.location.reload();
+    } catch (err) {
+      console.error("Failed to delete:", err);
+    }
+  };
+
   return (
-    <table
-      style={{
-        borderCollapse: "collapse",
-        width: "100%",
-        marginTop: "20px",
-        fontFamily: "Arial, sans-serif",
-      }}
-    >
+    <table>
       <thead>
         <tr>
-          <th
-            style={{
-              backgroundColor: "#f4f4f4",
-              border: "1px solid #ddd",
-              padding: "10px",
-              textAlign: "left",
-            }}
-          >
-            ID
-          </th>
-          <th
-            style={{
-              backgroundColor: "#f4f4f4",
-              border: "1px solid #ddd",
-              padding: "10px",
-              textAlign: "left",
-            }}
-          >
-            Name
-          </th>
-          <th
-            style={{
-              backgroundColor: "#f4f4f4",
-              border: "1px solid #ddd",
-              padding: "10px",
-              textAlign: "left",
-            }}
-          >
-            Price
-          </th>
-          <th
-            style={{
-              backgroundColor: "#f4f4f4",
-              border: "1px solid #ddd",
-              padding: "10px",
-              textAlign: "left",
-            }}
-          >
-            Quantity
-          </th>
-          <th
-            style={{
-              backgroundColor: "#f4f4f4",
-              border: "1px solid #ddd",
-              padding: "10px",
-              textAlign: "left",
-            }}
-          >
-            Type
-          </th>
-          <th
-            style={{
-              backgroundColor: "#f4f4f4",
-              border: "1px solid #ddd",
-              padding: "10px",
-              textAlign: "left",
-            }}
-          >
-            Update
-          </th>
-          <th
-            style={{
-              backgroundColor: "#f4f4f4",
-              border: "1px solid #ddd",
-              padding: "10px",
-              textAlign: "left",
-            }}
-          >
-            Delete
-          </th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Type</th>
+          <th>Update</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
-        {data.map((item) => (
+        {data?.map((item: Item) => (
           <tr key={item.id}>
-            <td
-              style={{
-                border: "1px solid #ddd",
-                padding: "10px",
-                textAlign: "left",
-              }}
-            >
-              {item.id}
-            </td>
-            <td
-              style={{
-                border: "1px solid #ddd",
-                padding: "10px",
-                textAlign: "left",
-              }}
-            >
-              {item.name}
-            </td>
-            <td
-              style={{
-                border: "1px solid #ddd",
-                padding: "10px",
-                textAlign: "left",
-              }}
-            >
-              {item.price}
-            </td>
-            <td
-              style={{
-                border: "1px solid #ddd",
-                padding: "10px",
-                textAlign: "left",
-              }}
-            >
-              {item.quantity}
-            </td>
-            <td
-              style={{
-                border: "1px solid #ddd",
-                padding: "10px",
-                textAlign: "left",
-              }}
-            >
-              {item.type}
-            </td>
-            <td
-              style={{
-                border: "1px solid #ddd",
-                padding: "10px",
-                textAlign: "center",
-              }}
-            >
+            <td>{item.name}</td>
+            <td>{item.price}</td>
+            <td>{item.quantity}</td>
+            <td>{item.type}</td>
+
+            <td>
               <Link href={`/update/${item.id}`}>
                 {" "}
                 <Button
                   value="Update"
-                  onClick={() => {}}
                   style={{
                     backgroundColor: "green",
                     color: "white",
@@ -168,25 +77,10 @@ const Table = ({ data }: TableProps) => {
                 />
               </Link>
             </td>
-            <td
-              style={{
-                border: "1px solid #ddd",
-                padding: "10px",
-                textAlign: "center",
-              }}
-            >
+            <td>
               <Button
                 value="Delete"
-                onClick={async () => {
-                  try {
-                    await fetch(`http://localhost:3000/products/${item.id}`, {
-                      method: "DELETE",
-                    });
-                    window.location.reload();
-                  } catch (err) {
-                    console.error("Failed to delete:", err);
-                  }
-                }}
+                onClick={() => handleDelete(item)}
                 style={{
                   backgroundColor: "red",
                   color: "white",

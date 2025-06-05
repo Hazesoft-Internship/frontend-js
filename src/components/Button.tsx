@@ -2,8 +2,8 @@
 
 type ButtonProps = {
   value: string;
-  onClick: () => void;
   style: React.CSSProperties;
+  onClick?: () => void;
 };
 
 const Button = ({ value, onClick, style }: ButtonProps) => {

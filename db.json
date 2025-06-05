@@ -1,10 +1,31 @@
 {
   "products": [
     {
-      "id": "1",
-      "name": "Water Bottle",
+      "name": "Fanta",
+      "price": 120,
+      "quantity": 100,
+      "type": "Physical",
+      "id": "3dbb"
+    },
+    {
+      "name": "AC",
+      "price": "110",
+      "quantity": 100,
+      "type": "Physical",
+      "id": "6f55"
+    },
+    {
+      "id": "17cb",
+      "name": "Tissue",
       "price": "120",
-      "quantity": "100",
+      "quantity": "99",
+      "type": "Physical"
+    },
+    {
+      "id": "4017",
+      "name": "Banana",
+      "price": "120",
+      "quantity": "199",
       "type": "Physical"
     }
   ],
