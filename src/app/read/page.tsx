@@ -15,32 +15,32 @@ type Item = {
 };
 
 const Read = () => {
-  const [load, setLoad] = useState(true);
-  const { response, loading, handleRequest } = useApiRequest<Item[]>();
+  const [data, setData] = useState<Item[]>([]);
+  const { loading, handleRequest } = useApiRequest();
+
+  const handleFetch = () => {
+    handleRequest({
+      url: "http://localhost:3000/products",
+      method: "get",
+      data: {},
+    })
+      .then((res) => {
+        setData(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
 
   useEffect(() => {
-    setLoad(loading);
-    const handleFetch = async () => {
-      try {
-        handleRequest({
-          url: "http://localhost:3000/products",
-          method: "get",
-          data: {},
-        });
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoad(false);
-      }
-    };
     handleFetch();
   }, [handleRequest]);
 
-  if (load) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
 
   return (
     <>
-      <Table data={response} />
+      {data && <Table data={data} mutate={handleFetch} />}
       <Link href="/create">
         <Button
           value="Go to Create "

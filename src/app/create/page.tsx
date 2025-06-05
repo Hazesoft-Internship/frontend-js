@@ -1,10 +1,12 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import Form from "@/components/Form";
 import useApiRequest from "../../hooks/useApiRequest";
+import { useRouter } from "next/navigation";
 
 const Create = () => {
+  const router = useRouter();
   const [input, setInput] = useState({
     name: "",
     price: 0,
@@ -19,20 +21,13 @@ const Create = () => {
       url: "http://localhost:3000/products",
       method: "post",
       data: JSON.stringify(input),
-    });
-
-    window.location.href = "/read";
-  };
-
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInput((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    })
+      .then(() => {
+        router.push("/read");
+      })
+      .catch(() => {
+        alert("Failed to create product");
+      });
   };
 
   return (
@@ -40,7 +35,7 @@ const Create = () => {
       <Form
         buttonValue="Create"
         value={input}
-        handleChange={handleChange}
+        setInput={setInput}
         handleFormSubmit={handleFormSubmit}
       />
     </>

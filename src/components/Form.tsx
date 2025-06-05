@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent } from "react";
+import { ChangeEvent, Dispatch, FormEvent, SetStateAction } from "react";
 import Button from "./Button";
 import "./css/form.css";
 
@@ -10,17 +10,32 @@ type FormProps = {
   };
   buttonValue: string;
   handleFormSubmit: (event: FormEvent) => void;
-  handleChange: (
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => void;
+  setInput: Dispatch<
+    SetStateAction<{
+      name: string;
+      price: number;
+      quantity: number;
+      type?: string;
+    }>
+  >;
 };
 
 const Form = ({
   value,
   handleFormSubmit,
-  handleChange,
+  setInput,
   buttonValue,
 }: FormProps) => {
+  
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = event.target;
+    setInput((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
   return (
     <form onSubmit={handleFormSubmit}>
       <label>Name: </label>

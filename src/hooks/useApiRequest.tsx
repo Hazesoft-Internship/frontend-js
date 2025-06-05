@@ -9,22 +9,18 @@ type UseApiRequestProps = {
   data?: any;
 };
 
-type ApiRequest<T> = {
-  response: T | [];
+type ApiRequest = {
   loading: boolean;
   error: AxiosError | null;
-  handleRequest: ({ url, method, data }: UseApiRequestProps) => void;
+  handleRequest: ({ url, method, data }: UseApiRequestProps) => Promise<any>;
 };
 
-const useApiRequest = <T>(): ApiRequest<T> => {
-  const [response, setResponse] = useState<T | []>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+const useApiRequest = (): ApiRequest => {
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<AxiosError | null>(null);
 
   const handleRequest = React.useCallback(
     async ({ url, method, data }: UseApiRequestProps) => {
-      setLoading(true);
-      setError(null);
       try {
         const options: AxiosRequestConfig = {
           url,
@@ -32,9 +28,10 @@ const useApiRequest = <T>(): ApiRequest<T> => {
           data,
         };
         const response = await axios(options);
-        setResponse(response.data);
+        return response.data;
       } catch (err) {
         setError(err as AxiosError);
+        throw err;
       } finally {
         setLoading(false);
       }
@@ -42,7 +39,7 @@ const useApiRequest = <T>(): ApiRequest<T> => {
     []
   );
 
-  return { response, loading, error, handleRequest };
+  return { loading, error, handleRequest };
 };
 
 export default useApiRequest;
