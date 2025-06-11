@@ -7,6 +7,7 @@ type FormProps = {
     name: string;
     price: number;
     quantity: number;
+    type: string;
   };
   buttonValue: string;
   handleFormSubmit: (event: FormEvent) => void;
@@ -15,7 +16,7 @@ type FormProps = {
       name: string;
       price: number;
       quantity: number;
-      type?: string;
+      type: string;
     }>
   >;
 };
@@ -26,7 +27,6 @@ const Form = ({
   setInput,
   buttonValue,
 }: FormProps) => {
-  
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -36,6 +36,7 @@ const Form = ({
       [name]: value,
     }));
   };
+
   return (
     <form onSubmit={handleFormSubmit}>
       <label>Name: </label>
@@ -60,7 +61,7 @@ const Form = ({
         onChange={handleChange}
       />
       <label>Type: </label>
-      <select name="type" onChange={handleChange}>
+      <select name="type" value={value?.type ?? ""} onChange={handleChange}>
         <option value="">Select</option>
         <option value="Physical">Physical</option>
         <option value="Digital">Digital</option>

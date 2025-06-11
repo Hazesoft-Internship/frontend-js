@@ -2,8 +2,8 @@
 
 import { FormEvent, useState } from "react";
 import Form from "@/components/Form";
-import useApiRequest from "../../hooks/useApiRequest";
 import { useRouter } from "next/navigation";
+import { createProduct } from "../actions/createProduct";
 
 const Create = () => {
   const router = useRouter();
@@ -11,23 +11,17 @@ const Create = () => {
     name: "",
     price: 0,
     quantity: 0,
+    type: "",
   });
-
-  const { handleRequest } = useApiRequest();
 
   const handleFormSubmit = (event: FormEvent): void => {
     event.preventDefault();
-    handleRequest({
-      url: "http://localhost:3000/products",
-      method: "post",
-      data: JSON.stringify(input),
-    })
-      .then(() => {
-        router.push("/read");
-      })
-      .catch(() => {
-        alert("Failed to create product");
-      });
+    try {
+      createProduct(input);
+      router.push("/read");
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (

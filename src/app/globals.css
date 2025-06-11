@@ -1,3 +1,7 @@
-*{
-    font-family: sans-serif;
-}
+@import "tailwindcss";
+
+:root {
+    font-family: var(--font-noto-sans), sans-serif;
+  }
+  
+

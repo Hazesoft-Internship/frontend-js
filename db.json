@@ -1,5 +1,13 @@
 {
-  "products": [],
+  "products": [
+    {
+      "name": "Water Bot",
+      "price": 0,
+      "quantity": 0,
+      "type": "Physical",
+      "id": "dd8b"
+    }
+  ],
   "users": [
     {
       "id": "admin",

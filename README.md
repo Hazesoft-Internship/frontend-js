@@ -1,15 +1,17 @@
-# CRUD App
+
 
 ## Getting Started
 
-To start the project, use the following commands:
+First, run the development server:
 
-### Start the Development Server
 ```bash
 npm run dev
 ```
 
-### Start the JSON Server
+Then, start the JSON server:
+
 ```bash
 npx json-server db.json
 ```
+
+

@@ -4,7 +4,7 @@ import React from "react";
 import Button from "./Button";
 import Link from "next/link";
 import "./css/table.css";
-import useApiRequest from "@/hooks/useApiRequest";
+import { deleteProduct } from "@/app/actions/deleteProduct";
 
 type Item = {
   id: string;
@@ -16,27 +16,18 @@ type Item = {
 
 type TableProps = {
   data: Item[];
-  mutate: () => void;
 };
 
-const Table = ({ data, mutate }: TableProps) => {
-  const { handleRequest } = useApiRequest();
-
+const Table = ({ data }: TableProps) => {
   const handleDelete = async (item: Item) => {
-    let confirm = window.confirm(`Do you want to delete ${item.name} ?`);
-    if (!confirm) {
-      return;
+    const confirmDelete = window.confirm(`Do you want to delete ${item.name}?`);
+    if (!confirmDelete) return;
+
+    try {
+      deleteProduct(item.id);
+    } catch (error) {
+      alert(error);
     }
-    handleRequest({
-      url: `http://localhost:3000/products/${item.id}`,
-      method: "delete",
-    })
-      .then(() => {
-        mutate();
-      })
-      .catch(() => {
-        alert("Failed to delete product");
-      });
   };
 
   return (
@@ -53,16 +44,14 @@ const Table = ({ data, mutate }: TableProps) => {
           </tr>
         </thead>
         <tbody>
-          {data?.map((item: Item) => (
+          {data?.map((item) => (
             <tr key={item.id}>
               <td>{item.name}</td>
               <td>{item.price}</td>
               <td>{item.quantity}</td>
               <td>{item.type}</td>
-
               <td>
                 <Link href={`/update/${item.id}`}>
-                  {" "}
                   <Button
                     value="Update"
                     style={{
@@ -70,7 +59,6 @@ const Table = ({ data, mutate }: TableProps) => {
                       color: "white",
                       border: "none",
                       padding: "5px 10px",
-                      cursor: "pointer",
                     }}
                   />
                 </Link>
@@ -84,7 +72,6 @@ const Table = ({ data, mutate }: TableProps) => {
                     color: "white",
                     border: "none",
                     padding: "5px 10px",
-                    cursor: "pointer",
                   }}
                 />
               </td>
